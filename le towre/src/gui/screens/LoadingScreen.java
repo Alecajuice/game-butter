@@ -1,4 +1,4 @@
-package screens;
+package gui.screens;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -17,14 +17,14 @@ import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.util.ResourceLoader;
 
-import graphics.Button;
 import graphics.GameFont;
 import graphics.Sprite;
 import graphics.StaticSprite;
 
 
-public class LoadingScreen extends Screen {
-
+public class LoadingScreen extends Screen
+{
+	String[] loadingText;
 	String[] loadingText = { "Optimizing HD textures...", "Rendering volcanoes...", "Beginning World War III...", "Making tea...", "Drinking tea...", "Growing grass...", "Doing some last minute programming...", "Grazing grass...."
 			,"Hunting down remaining humans...", "Picking up money from the ground...", "Watching Jurassic Park...", "Loading in Halo...", "Throwing exceptions...", 
 			"Launching secret mission to drive tank squadrons into Ground Zero, Paris...", "Having cake and eating it too...", "Feasting on the bodies of a thousand souls...",  
@@ -42,14 +42,11 @@ public class LoadingScreen extends Screen {
 	private int prevCount = count;
 	private boolean done = false;
 
-
-	public LoadingScreen(letowre game) {
-		this(game, StaticSprite.dirt); //THIS IS TEMPORARY (A PLACEHOLDER)
-
-	}
-
-	public LoadingScreen(letowre game, Sprite background) {
-		super(game, background); 
+	public LoadingScreen()
+	{
+		super(); 
+		
+		Scanner s = new Scanner(new File(""))
 		
 		randNum = (int)Math.round(Math.random()*(loadingText.length-1));
 		loadText = loadingText[randNum];

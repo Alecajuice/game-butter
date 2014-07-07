@@ -1,4 +1,4 @@
-package screens;
+package gui.screens;
 
 import letowre.letowre;
 
@@ -6,6 +6,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
 import graphics.*;
+import gui.Button;
 
 public class MainMenu extends Screen {
 

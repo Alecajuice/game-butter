@@ -1,19 +1,15 @@
-package graphics;
+package gui;
+
+import graphics.Sprite;
+import graphics.StaticSprite;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.util.Dimension;
+
 import kinematics.Position;
-public class Button {
-
-	public static final Button playButton = new Button(StaticSprite.play, new Position(800, 450), 256, 64);
-	public static final Button quitButton = new Button(StaticSprite.quit, new Position(800, 516), 128, 32);
-	public static final Button settingsButton = new Button(StaticSprite.settings, new Position(928, 516), 128, 32);
-	public static final Button backbutton = new Button(StaticSprite.back, new Position(10, 10), 64, 32);
-	public static final Button pauseButton = new Button(StaticSprite.pause, new Position(1250, 10), 16, 16);
-	public static final Button unpauseButton = new Button(StaticSprite.unpause, new Position(576, 296), 128, 128);
-	public static final Button settingsButton2 = new Button(StaticSprite.settings2, new Position(576, 424), 128, 30);
-
+public class Button extends Gui
+{
 	private Sprite[] sprite;
 	private Position pos;
 	private int width, height;
