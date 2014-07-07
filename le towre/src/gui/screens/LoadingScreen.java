@@ -17,21 +17,14 @@ import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.util.ResourceLoader;
 
-import graphics.GameFont;
+import resource.TextResource;
 import graphics.Sprite;
 import graphics.StaticSprite;
 
 
 public class LoadingScreen extends Screen
 {
-	String[] loadingText;
-	String[] loadingText = { "Optimizing HD textures...", "Rendering volcanoes...", "Beginning World War III...", "Making tea...", "Drinking tea...", "Growing grass...", "Doing some last minute programming...", "Grazing grass...."
-			,"Hunting down remaining humans...", "Picking up money from the ground...", "Watching Jurassic Park...", "Loading in Halo...", "Throwing exceptions...", 
-			"Launching secret mission to drive tank squadrons into Ground Zero, Paris...", "Having cake and eating it too...", "Feasting on the bodies of a thousand souls...",  
-			"Pondering life...", "Exploiting the elderly...", "Painting watercolors...", "Porting to Ubuntu...", "Ensuring compatability with Xbox One..",
-			"Alerting Putin...", "Starting communist revolution...", "Transfering funds to Swiss bank account..."
-	
-	};
+	private static TextResource loadingTexts = new TextResource("loadingText", "txt");
 	String loadText = "";
 
 	private TrueTypeFont font;
@@ -46,10 +39,9 @@ public class LoadingScreen extends Screen
 	{
 		super(); 
 		
-		Scanner s = new Scanner(new File(""))
 		
-		randNum = (int)Math.round(Math.random()*(loadingText.length-1));
-		loadText = loadingText[randNum];
+		randNum = (int)Math.round(Math.random()*(loadingTexts.getText().length-1));
+		loadText = loadingTexts.getText()[randNum];
 		
 		try {
 			InputStream inputStream	= ResourceLoader.getResourceAsStream("/res/fonts/AlexandriaFLF-Italic.ttf");
@@ -66,21 +58,21 @@ public class LoadingScreen extends Screen
 
 	public Screen update() {
 		if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE))
-			return new MainMenu(game);
+			return new MainMenu();
 		if (count % 90 == 0 && count != prevCount) {
-			randNum = (int)Math.round(Math.random()*(loadingText.length-1));
+			randNum = (int)Math.round(Math.random()*(loadingTexts.getText().length-1));
 			prevCount = count;
-			loadText = loadingText[randNum];
+			loadText = loadingTexts.getText()[randNum];
 		}
 		count++;
 		if (done)
-			return new WorldScreen(game);
+			return new WorldScreen();
 
 		return this;
 	}
 
 	public void draw() {
-		font.drawString((game.getScreenWidth()/2)-(loadText.length()/2*10), 600, loadText); //to be changed to move according to length of string
+		font.drawString((letowre.getGame().getScreenWidth()/2)-(loadText.length()/2*10), 600, loadText); //to be changed to move according to length of string
 
 	}
 	

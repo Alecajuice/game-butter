@@ -8,14 +8,12 @@ import org.lwjgl.opengl.Display;
 import graphics.*;
 import gui.Button;
 
-public class MainMenu extends Screen {
+public class MainMenu extends Screen
+{
 
-	private Button playButton = new Button(Button.playButton);
-	private Button quitButton = new Button(Button.quitButton);
-	private Button settingsButton = new Button(Button.settingsButton);
 	private int count = 0;
 
-	public MainMenu(letowre game) {
+	public MainMenu() {
 		this(game, StaticSprite.background);
 	}
 

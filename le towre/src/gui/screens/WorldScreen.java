@@ -14,7 +14,7 @@ public class WorldScreen extends Screen {
 	private  Button pauseButton = new Button(Button.pauseButton);
 	private int count = 0;
 
-	public WorldScreen(letowre game) {
+	public WorldScreen() {
 		this(game, new World(game));
 	}
 

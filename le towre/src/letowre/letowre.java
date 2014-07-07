@@ -17,13 +17,16 @@ public class letowre
 		public int getScreenWidth() {return SCREEN_WIDTH;}
 	public final int SCREEN_HEIGHT = 720; //720
 		public int getScreenHeight() {return SCREEN_HEIGHT;}
-		
+	
+	private static letowre game;
+		public static letowre getGame(){return game;}
+	
 	private Gui focus;
 	private Screen currentScreen;
 	
 	public static void main(String[] args)
 	{
-		new letowre();
+		game = new letowre();
 	}
 	
 	private letowre()
