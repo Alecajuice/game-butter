@@ -13,7 +13,7 @@ public abstract class Resource extends File
 
 	public Resource(String filePath, String fileType)
 	{
-		super("/assets/" + filePath + "." + fileType);
+		super("assets/" + filePath + "." + fileType);
 		this.fileType = fileType;
 		loader.execute();
 	}

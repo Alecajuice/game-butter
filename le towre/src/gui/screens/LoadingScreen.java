@@ -2,6 +2,7 @@ package gui.screens;
 
 import static org.lwjgl.opengl.GL11.*;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.io.InputStream;
 
@@ -17,6 +18,7 @@ import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.util.ResourceLoader;
 
+import resource.FontResource;
 import resource.TextResource;
 import graphics.Sprite;
 import graphics.StaticSprite;
@@ -24,10 +26,10 @@ import graphics.StaticSprite;
 
 public class LoadingScreen extends Screen
 {
-	private static TextResource loadingTexts = new TextResource("loadingText", "txt");
+	private static TextResource loadingTexts = new TextResource("loadingTexts", "txt");
 	String loadText = "";
 
-	private TrueTypeFont font;
+	private FontResource font;
 	private boolean antiAlias = true;
 	private static final int loadingTime = 90; 
 	private static int randNum;
@@ -37,26 +39,16 @@ public class LoadingScreen extends Screen
 
 	public LoadingScreen()
 	{
-		super(); 
+		super();
 		
+		font = new FontResource("square", "ttf", Color.white, 20, false, true);
 		
-		randNum = (int)Math.round(Math.random()*(loadingTexts.getText().length-1));
-		loadText = loadingTexts.getText()[randNum];
-		
-		try {
-			InputStream inputStream	= ResourceLoader.getResourceAsStream("/res/fonts/AlexandriaFLF-Italic.ttf");
-			Font awtFont2 = Font.createFont(Font.TRUETYPE_FONT, inputStream);
-			awtFont2 = awtFont2.deriveFont(20f); //set font size
-			font = new TrueTypeFont(awtFont2, false);
-				
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		Load loading = new Load();
-		loading.execute();
+//		randNum = (int)Math.round(Math.random()*(loadingTexts.getText().length-1));
+//		loadText = loadingTexts.getText()[randNum];
 	}
 
-	public Screen update() {
+	public Screen update()
+	{
 		if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE))
 			return new MainMenu();
 		if (count % 90 == 0 && count != prevCount) {
@@ -65,35 +57,21 @@ public class LoadingScreen extends Screen
 			loadText = loadingTexts.getText()[randNum];
 		}
 		count++;
-		if (done)
-			return new WorldScreen();
+//		if (done)
+//			return new WorldScreen();
 
 		return this;
 	}
 
-	public void draw() {
-		font.drawString((letowre.getGame().getScreenWidth()/2)-(loadText.length()/2*10), 600, loadText); //to be changed to move according to length of string
-
+	public void draw()
+	{
+		try {
+			font.drawString((letowre.getGame().getScreenWidth()/2)-(loadText.length()/2*10), 600, loadText); //to be changed to move according to length of string
+		} catch(NullPointerException e){}
 	}
 	
-	public void reset() {
-		count = 0;
-	}
-
-	class Load extends SwingWorker<Void, Void>
+	public void reset()
 	{
-
-		@Override
-		protected Void doInBackground() throws Exception
-		{
-			GameFont.loadFonts();
-			done = true;
-			return null;
-		}
-		
-		public void done()
-		{
-			System.out.println("Fully loaded and operational.");
-		}
+		count = 0;
 	}
 }

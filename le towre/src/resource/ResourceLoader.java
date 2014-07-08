@@ -15,10 +15,11 @@ public class ResourceLoader extends SwingWorker<Void, Void>
 	protected Void doInBackground() throws Exception
 	{
 		r.loadResource();
+		donee();
 		return null;
 	}
 	
-	public void done()
+	public void donee()
 	{
 		System.out.println("Loaded resource " + r.getPath());
 	}

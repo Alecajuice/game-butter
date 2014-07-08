@@ -21,14 +21,14 @@ public class TextResource extends Resource
 	{
 		try {
 			Scanner s = new Scanner(this);
+			ArrayList list = new ArrayList<String>();
 			while(s.hasNextLine())
 			{
-				ArrayList list = new ArrayList<String>();
 				String line = s.nextLine();
 				list.add(line);
-				text = (String[])list.toArray();
 			}
-		} catch (FileNotFoundException e) {}
+			text = (String[])list.toArray(new String[list.size()]);
+		} catch (FileNotFoundException e) {e.printStackTrace();}
 		
 	}
 	

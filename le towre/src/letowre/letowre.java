@@ -6,16 +6,20 @@ import gui.Gui;
 import gui.screens.LoadingScreen;
 import gui.screens.Screen;
 
+import org.lwjgl.LWJGLException;
 import org.lwjgl.openal.AL;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
+import org.lwjgl.opengl.Drawable;
+import org.lwjgl.opengl.SharedDrawable;
 
 public class letowre
 {
 
-	public final int SCREEN_WIDTH = 1280; //1280 
+	private static final int UPDATE_SPEED = 60;
+	private final int SCREEN_WIDTH = 1280; //1280 
 		public int getScreenWidth() {return SCREEN_WIDTH;}
-	public final int SCREEN_HEIGHT = 720; //720
+	private final int SCREEN_HEIGHT = 720; //720
 		public int getScreenHeight() {return SCREEN_HEIGHT;}
 	
 	private static letowre game;
@@ -27,6 +31,7 @@ public class letowre
 	public static void main(String[] args)
 	{
 		game = new letowre();
+		game.start();
 	}
 	
 	private letowre()
@@ -51,7 +56,10 @@ public class letowre
 
 		//Init screen
 		currentScreen = new LoadingScreen();
-		
+	}
+	
+	private void start()
+	{
 		//HERE IT IS, IN ALL IT'S GLORY (btw it's its)
 		mainLoop();
 		//THAT WAS ANTICLIMACTIC
@@ -73,16 +81,26 @@ public class letowre
 	
 	private void update()
 	{
-		
+		currentScreen.update();
 	}
 	
 	private void render()
 	{
+		glClear(GL_COLOR_BUFFER_BIT);
 		
+		currentScreen.draw();
+
+		Display.update();
+		Display.sync(UPDATE_SPEED);
 	}
 
 	public float getVolume() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	public static Drawable getDrawable() throws LWJGLException
+	{
+		return new SharedDrawable(Display.getDrawable());
 	}
 }

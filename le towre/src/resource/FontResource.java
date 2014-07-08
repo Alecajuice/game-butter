@@ -6,6 +6,9 @@ import java.awt.FontFormatException;
 import java.io.IOException;
 import java.io.InputStream;
 
+import letowre.letowre;
+
+import org.lwjgl.LWJGLException;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.UnicodeFont;
@@ -22,9 +25,14 @@ public class FontResource extends Resource
 	private boolean bold;
 	private boolean italic;
 		
+	public FontResource(String filePath, String fileType)
+	{
+		this(filePath, fileType, Color.black, 20, false, false);
+	}
+	
 	public FontResource(String filePath, String fileType, Color color, int size, boolean bold, boolean italic)
 	{
-		super(filePath, "ttf");
+		super("fonts/" + filePath, "ttf");
 		this.fileName = filePath;
 		this.size = size;
 		this.bold = bold;
@@ -40,10 +48,16 @@ public class FontResource extends Resource
 	protected void loadResource()
 	{
 		try {
+			letowre.getDrawable().makeCurrent();
+		} catch (LWJGLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
 			InputStream inputStream	= ResourceLoader.getResourceAsStream(this.getPath());
 			awtFont = Font.createFont(Font.TRUETYPE_FONT, inputStream);
 			font = new UnicodeFont(awtFont, size, bold, italic);
-		} catch (FontFormatException e) {} catch (IOException e) {}
+		} catch (FontFormatException e) {} catch (IOException e) {e.printStackTrace();}
 		font.getEffects().add(new ColorEffect(color));
 		font.addAsciiGlyphs();
 		try {
@@ -52,6 +66,11 @@ public class FontResource extends Resource
 			System.out.println("Fehler beim Laden einer Schriftart.");
 			e.printStackTrace();
 		}
+	}
+
+	public void drawString(int x, int y, String text)
+	{
+		font.drawString(x, y, text);
 	}
 
 }
