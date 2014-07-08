@@ -13,12 +13,9 @@ public class MainMenu extends Screen
 
 	private int count = 0;
 
-	public MainMenu() {
-		this(game, StaticSprite.background);
-	}
-
-	public MainMenu(letowre game, StaticSprite background) {
-		super(game, background);
+	public MainMenu()
+	{
+		
 	}
 
 	public Screen update() {
@@ -41,7 +38,9 @@ public class MainMenu extends Screen
 		return this;
 	}
 
-	public void draw() {
+	public void draw()
+	{
+		super.draw();
 		background.draw(0, 0, game.getScreenWidth()+800, game.getScreenHeight()+400); //Background is being stupid and doesn't correctly display its size
 		playButton.draw();
 		quitButton.draw();

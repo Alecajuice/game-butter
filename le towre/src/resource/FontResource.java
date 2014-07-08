@@ -40,6 +40,7 @@ public class FontResource extends Resource
 	{
 		super("fonts/" + filePath, "ttf");
 		this.fileName = filePath;
+		this.color = color;
 		this.size = size;
 		this.bold = bold;
 		this.italic = italic;
@@ -53,24 +54,45 @@ public class FontResource extends Resource
 	@Override
 	protected void loadResource()
 	{
-		try {
-			letowre.getDrawable().makeCurrent();
-		} catch (LWJGLException e) {}
-		try {
-			InputStream inputStream	= ResourceLoader.getResourceAsStream(this.getPath());
-			awtFont = Font.createFont(Font.TRUETYPE_FONT, inputStream).deriveFont(size);
-			font = new UnicodeFont(awtFont, size, bold, italic);
-		} catch (FontFormatException e) {} catch (IOException e) {e.printStackTrace();}
-		font.getEffects().add(new ColorEffect(color));
-		font.addAsciiGlyphs();
-		try {
-			font.loadGlyphs();
-		} catch (SlickException e) {}
-		this.metrics = new Canvas().getFontMetrics(awtFont.deriveFont((float)size));
+		if(!loaded)
+		{
+			try {
+				letowre.getDrawable().makeCurrent();
+			} catch (LWJGLException e) {}
+			try {
+				InputStream inputStream	= ResourceLoader.getResourceAsStream(this.getPath());
+				awtFont = Font.createFont(Font.TRUETYPE_FONT, inputStream).deriveFont(size);
+				font = new UnicodeFont(awtFont, size, bold, italic);
+			} catch (FontFormatException e) {} catch (IOException e) {e.printStackTrace();}
+			font.getEffects().add(new ColorEffect(color));
+			font.addAsciiGlyphs();
+			try {
+				font.loadGlyphs();
+			} catch (SlickException e) {}
+			this.metrics = new Canvas().getFontMetrics(awtFont.deriveFont((float)size));
+			loaded = true;
+		}
 	}
 
 	public void drawString(int x, int y, String text)
 	{
 		font.drawString(x, y, text);
+	}
+	
+	@Override
+	public void register()
+	{
+		Resource.resources.put("font-" + fileName + color + size + bold + italic, this);
+		System.out.println("Registered resource font-" + fileName + color + size + bold + italic);
+	}
+	
+	public static String getKey(String fileName, Color color, int size, boolean bold, boolean italic)
+	{
+		return "font-" + fileName + color + size + bold + italic;
+	}
+	
+	public String getKey()
+	{
+		return "font-" + fileName + color + size + bold + italic;
 	}
 }

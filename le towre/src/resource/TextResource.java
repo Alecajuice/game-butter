@@ -32,4 +32,19 @@ public class TextResource extends Resource
 		
 	}
 	
+	@Override
+	public void register()
+	{
+		Resource.resources.put("text-" + fileName, this);
+	}
+	
+	public String getKey(String fileName)
+	{
+		return "text-" + fileName;
+	}
+	
+	public String getKey()
+	{
+		return "text-" + fileName;
+	}
 }
