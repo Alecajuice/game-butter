@@ -2,6 +2,12 @@ package letowre;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.openal.AL10.*;
+
+import java.awt.Component;
+import java.awt.Graphics;
+
+import javax.swing.JComponent;
+
 import gui.Gui;
 import gui.screens.LoadingScreen;
 import gui.screens.Screen;
@@ -12,6 +18,8 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.Drawable;
 import org.lwjgl.opengl.SharedDrawable;
+
+import resource.FontResource;
 
 public class letowre
 {

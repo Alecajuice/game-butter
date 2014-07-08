@@ -66,8 +66,10 @@ public class LoadingScreen extends Screen
 	public void draw()
 	{
 		try {
-			font.drawString((letowre.getGame().getScreenWidth()/2)-(loadText.length()/2*10), 600, loadText); //to be changed to move according to length of string
-		} catch(NullPointerException e){}
+			font.drawString((letowre.getGame().getScreenWidth()/2)-(font.getMetrics().stringWidth(loadText)/2), 600, loadText); //to be changed to move according to length of string
+		} catch(NullPointerException e){
+			e.printStackTrace();
+		}
 	}
 	
 	public void reset()

@@ -1,16 +1,20 @@
 package resource;
 
+import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
 import java.io.IOException;
 import java.io.InputStream;
+
+import javax.swing.JComponent;
 
 import letowre.letowre;
 
 import org.lwjgl.LWJGLException;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.util.ResourceLoader;
@@ -24,6 +28,8 @@ public class FontResource extends Resource
 	private int size;
 	private boolean bold;
 	private boolean italic;
+	private FontMetrics metrics;
+		public FontMetrics getMetrics(){return metrics;}
 		
 	public FontResource(String filePath, String fileType)
 	{
@@ -49,28 +55,22 @@ public class FontResource extends Resource
 	{
 		try {
 			letowre.getDrawable().makeCurrent();
-		} catch (LWJGLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} catch (LWJGLException e) {}
 		try {
 			InputStream inputStream	= ResourceLoader.getResourceAsStream(this.getPath());
-			awtFont = Font.createFont(Font.TRUETYPE_FONT, inputStream);
+			awtFont = Font.createFont(Font.TRUETYPE_FONT, inputStream).deriveFont(size);
 			font = new UnicodeFont(awtFont, size, bold, italic);
 		} catch (FontFormatException e) {} catch (IOException e) {e.printStackTrace();}
 		font.getEffects().add(new ColorEffect(color));
 		font.addAsciiGlyphs();
 		try {
 			font.loadGlyphs();
-		} catch (SlickException e) {
-			System.out.println("Fehler beim Laden einer Schriftart.");
-			e.printStackTrace();
-		}
+		} catch (SlickException e) {}
+		this.metrics = new Canvas().getFontMetrics(awtFont.deriveFont((float)size));
 	}
 
 	public void drawString(int x, int y, String text)
 	{
 		font.drawString(x, y, text);
 	}
-
 }
