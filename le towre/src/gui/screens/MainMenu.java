@@ -1,4 +1,4 @@
-package screens;
+package gui.screens;
 
 import letowre.letowre;
 
@@ -6,20 +6,16 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
 import graphics.*;
+import gui.Button;
 
-public class MainMenu extends Screen {
+public class MainMenu extends Screen
+{
 
-	private Button playButton = new Button(Button.playButton);
-	private Button quitButton = new Button(Button.quitButton);
-	private Button settingsButton = new Button(Button.settingsButton);
 	private int count = 0;
 
-	public MainMenu(letowre game) {
-		this(game, StaticSprite.background);
-	}
-
-	public MainMenu(letowre game, StaticSprite background) {
-		super(game, background);
+	public MainMenu()
+	{
+		
 	}
 
 	public Screen update() {
@@ -42,7 +38,9 @@ public class MainMenu extends Screen {
 		return this;
 	}
 
-	public void draw() {
+	public void draw()
+	{
+		super.draw();
 		background.draw(0, 0, game.getScreenWidth()+800, game.getScreenHeight()+400); //Background is being stupid and doesn't correctly display its size
 		playButton.draw();
 		quitButton.draw();

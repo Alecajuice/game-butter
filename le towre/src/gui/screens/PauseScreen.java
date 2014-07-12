@@ -1,9 +1,9 @@
-package screens;
+package gui.screens;
 
 import org.lwjgl.input.Keyboard;
 
-import graphics.Button;
 import graphics.StaticSprite;
+import gui.Button;
 import letowre.letowre;
 
 public class PauseScreen extends Screen {

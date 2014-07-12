@@ -1,4 +1,4 @@
-package screens;
+package gui.screens;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;

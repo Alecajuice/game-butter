@@ -11,9 +11,9 @@ import org.newdawn.slick.Color;
 
 import particles.Particle;
 import audio.Sound;
-import screens.GameOverScreen;
-import screens.MainMenu;
 import graphics.StaticSprite;
+import gui.screens.GameOverScreen;
+import gui.screens.MainMenu;
 import world.World;
 import kinematics.*;
 

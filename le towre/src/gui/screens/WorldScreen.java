@@ -1,12 +1,11 @@
-package screens;
+package gui.screens;
 
-import graphics.Button;
 import org.lwjgl.input.Keyboard;
 
 import world.World;
-import graphics.Button;
 import graphics.Sprite;
 import graphics.StaticSprite;
+import gui.Button;
 import letowre.letowre;
 
 public class WorldScreen extends Screen {
@@ -15,7 +14,7 @@ public class WorldScreen extends Screen {
 	private  Button pauseButton = new Button(Button.pauseButton);
 	private int count = 0;
 
-	public WorldScreen(letowre game) {
+	public WorldScreen() {
 		this(game, new World(game));
 	}
 

@@ -1,4 +1,4 @@
-package screens;
+package gui.screens;
 
 import letowre.letowre;
 
@@ -6,10 +6,10 @@ import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Color;
 
 import audio.Sound;
-import graphics.Button;
 import graphics.GameFont;
 import graphics.Sprite;
 import graphics.StaticSprite;
+import gui.Button;
 
 public class GameOverScreen extends Screen {
 	
