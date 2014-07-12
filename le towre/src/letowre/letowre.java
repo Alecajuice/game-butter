@@ -36,6 +36,8 @@ public class letowre
 	private Gui focus;
 	private Screen currentScreen;
 	
+	public SharedDrawable drawable;
+	
 	public static void main(String[] args)
 	{
 		game = new letowre();
@@ -64,6 +66,13 @@ public class letowre
 
 		//Init screen
 		currentScreen = new LoadingScreen();
+		
+		try {
+			drawable = new SharedDrawable(Display.getDrawable());
+		} catch (LWJGLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private void start()
@@ -106,10 +115,5 @@ public class letowre
 	{
 		// TODO Auto-generated method stub
 		return 0;
-	}
-
-	public static Drawable getDrawable() throws LWJGLException
-	{
-		return new SharedDrawable(Display.getDrawable());
 	}
 }

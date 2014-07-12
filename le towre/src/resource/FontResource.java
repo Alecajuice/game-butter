@@ -14,6 +14,7 @@ import javax.swing.JComponent;
 import letowre.letowre;
 
 import org.lwjgl.LWJGLException;
+import org.lwjgl.opengl.Display;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.font.effects.ColorEffect;
@@ -57,7 +58,7 @@ public class FontResource extends Resource
 		if(!loaded)
 		{
 			try {
-				letowre.getDrawable().makeCurrent();
+				letowre.getGame().drawable.makeCurrent();
 			} catch (LWJGLException e) {}
 			try {
 				InputStream inputStream	= ResourceLoader.getResourceAsStream(this.getPath());
@@ -68,7 +69,7 @@ public class FontResource extends Resource
 			font.addAsciiGlyphs();
 			try {
 				font.loadGlyphs();
-			} catch (SlickException e) {}
+			} catch (SlickException e) {e.printStackTrace();}
 			this.metrics = new Canvas().getFontMetrics(awtFont.deriveFont((float)size));
 			loaded = true;
 		}

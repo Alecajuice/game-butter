@@ -67,30 +67,33 @@ public class LoadingScreen extends Screen
 			randNum = (int)Math.round(Math.random()*(loadingTexts.getText().length-1));
 			prevCount = count;
 			loadText = loadingTexts.getText()[randNum];
-			if (font.getMetrics().stringWidth(loadText) > letowre.getGame().getScreenWidth())
+			try
 			{
-				System.out.println("hi");
-				boolean breakfound = false;
-				int prevSpace = 0;
-				while(!breakfound)
+				if (font.getMetrics().stringWidth(loadText) > letowre.getGame().getScreenWidth())
 				{
-					if(loadText.indexOf(" ", prevSpace + 1) > loadText.length()/2)
+					System.out.println("hi");
+					boolean breakfound = false;
+					int prevSpace = 0;
+					while(!breakfound)
 					{
-						breakfound = true;
-						loadText = loadText.substring(0, loadText.indexOf(" ", prevSpace + 1) - 2) + "/n" + loadText.substring(loadText.indexOf(" ", prevSpace + 1) - 1);
-						System.out.println(loadText);
-					}
-					else if (loadText.indexOf(" ") == -1)
-					{
-						breakfound = true;
-						System.out.println("fk");
-					}
-					else
-					{
-						prevSpace = loadText.indexOf(" ", prevSpace + 1);
+						if(loadText.indexOf(" ", prevSpace + 1) > loadText.length()/2)
+						{
+							breakfound = true;
+							loadText = loadText.substring(0, loadText.indexOf(" ", prevSpace + 1) - 2) + "/n" + loadText.substring(loadText.indexOf(" ", prevSpace + 1) - 1);
+							System.out.println(loadText);
+						}
+						else if (loadText.indexOf(" ") == -1)
+						{
+							breakfound = true;
+							System.out.println("fk");
+						}
+						else
+						{
+							prevSpace = loadText.indexOf(" ", prevSpace + 1);
+						}
 					}
 				}
-			}
+			} catch (NullPointerException e){e.printStackTrace();}
 		}
 		count++;
 		boolean done = true;
